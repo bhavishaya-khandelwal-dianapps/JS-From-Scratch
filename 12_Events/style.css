@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: hsl(0, 0%, 94%);
+}
+
+p {
+    color: green;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
