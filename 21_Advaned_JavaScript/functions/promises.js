@@ -3,6 +3,8 @@
 //* ==========================================
 
 //? A promise in JavaScript is an object that represents the eventual completion or failure of an asynchronous operation. It allows you to handle asynchronous operations more easily and cleanly by providing a way to write asynchronous code that looks synchronous.
+//* A promise in JavaScript is an object that represents the eventual completion or failure of an asynchronous operation. It is used for handling asynchronous operations, such as making API calls or reading files, in a more organized and readable way.
+
 
 //todo 👉 In simpler terms, a promise is like a placeholder for the result of an asynchronous operation. Or A container for the future result or value.
 
@@ -89,11 +91,21 @@ pr.then((res) => {
 //* Promise Methods
 //* ==========================================
 
-//? Promise.all is used when you want to wait for all promises to complete successfully. Reject state will throw an error.
+//? Promise.all() is used when you want to wait for all promises to complete successfully. Reject state will throw an error.
 
-//? Promise.allSettled is used when you want to wait for all promises to complete, regardless of success or failure, and get information about their outcomes.
+//? Promise.allSettled() is used when you want to wait for all promises to complete, regardless of success or failure, and get information about their outcomes.
 
-//? Promise.race is used when you are interested in the result of the first promise that completes, regardless of success or failure.
+//? Promise.race() is used when you are interested in the result of the first promise that completes, regardless of success or failure.
+
+//? Promise.any() Returns a single Promise from a list of promises, When any promise fulfills
+
+//? Promise.resolve() Returns a Promise object resolved with a value
+
+//? Catch() Provides a function to be called when a promise is rejected
+
+//? Finally Provides a function to be called when a promise is fulfilled or rejected
+
+//? Then() Provide two functions to be called when a promise is fulfilled or rejected
 
 // Example usage:
 
@@ -135,13 +147,13 @@ const promise1 = new Promise((resolve, reject) =>
     setTimeout(() => resolve("First"), 2000)
 );
   
-const promise2 = new Promise((resolve) =>
-    setTimeout(() => resolve("Second"), 5000)
-);
-  
-// const promise2 = new Promise((resolve, reject) =>
-//     setTimeout(() => reject("Failed"), 3000)
+// const promise2 = new Promise((resolve) =>
+//     setTimeout(() => resolve("Second"), 5000)
 // );
+  
+const promise2 = new Promise((resolve, reject) =>
+    setTimeout(() => reject("Failed"), 3000)
+);
 
 const promise3 = new Promise((resolve) =>
     setTimeout(() => resolve("Third"), 1000)
@@ -150,23 +162,34 @@ const promise3 = new Promise((resolve) =>
 
 //* Promise.all 
 Promise.all([promise1, promise3, promise2]).then((values) => {
+    console.log("Promise.all()");
     console.log(values);
 }).catch((error) => {
-    console.error(error);
+    console.error(`Promise.all() ${error}`);
 });
 
 
 //* Promise.allSettled
-Promise.allSettled([promise1, promise2, promise3]).then((values) => {
+Promise.allSettled([promise1, promise2, promise3]).then((values) => { 
+    console.log("Promise.allSettled()");
     console.log(values);
 }).catch((error) => {
-    console.error(error);
+  console.error(`Promise.allSettled() ${error}`);
 })
 
 
 //* Promise.race
 Promise.race([promise1, promise2, promise3]).then((values) => {
+    console.log("Promise.Race()");
     console.log(values);
 }).catch((error) => {
-    console.log(error);
+  console.error(`Promise.Race() ${error}`);
+})
+
+
+//* Promise.any() 
+Promise.any([promise1, promise2, promise3]).then((value) => {
+  console.log("Promise.any()", value);
+}).catch((error) => {
+  console.log(`Promise.any() ${error}`);
 })
